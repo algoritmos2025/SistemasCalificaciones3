@@ -35,13 +35,36 @@ void IngresoFijo()
     int cantidad;
     float nota;
 
-    Console.WriteLine("¿Cuántas notas desea ingresar?");
-    cantidad = int.Parse(Console.ReadLine());
+    bool cantidadValidada;
+
+    do
+    {
+        
+        Console.WriteLine("¿Cuántas notas desea ingresar?");
+        cantidadValidada=int.TryParse(Console.ReadLine(), out cantidad) & cantidad>0;
+
+        if (!cantidadValidada)
+        {
+            Console.WriteLine("Ingresa una cantidad numerica mayor a cero");
+        }
+
+    } while (!cantidadValidada);
+    
 
     for (int i = 0; i < cantidad; i++)
     {
-        Console.WriteLine($"Ingrese la nota del estudiante {i + 1}:");
-        nota = float.Parse(Console.ReadLine());
+        bool notaValidada;
+        do
+        {
+            Console.WriteLine($"Ingrese la nota del estudiante {i + 1}:");
+            notaValidada = float.TryParse(Console.ReadLine(),out nota) & nota>0 & nota<=10;
+            if (!notaValidada)
+            {
+                Console.WriteLine("Ingresa una nota numerica entre 1 y 10");
+            }
+
+        } while (!notaValidada);
+        
 
         if (nota >= 7)
         {
